@@ -11,12 +11,14 @@
       box-sizing: border-box;
     }
 
-    body, html {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background-color: #ffffff;
-    }
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+}
 
     /* Efek transisi antar halaman */
     body {
@@ -30,22 +32,14 @@
       opacity: 0; /* hilang smooth */
     }
 
-    .image-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .fullscreen-image {
-      width: 100%;
-      height: auto;
-      max-height: 100%;
-    }
+.image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
     @media (orientation: landscape) {
       .fullscreen-image {
@@ -53,6 +47,20 @@
         height: 100%;
       }
     }
+
+    /* Atur tombol agar responsif di layar kecil */
+@media (max-width: 300px) {
+  .overlay-btn {
+    width: 12rem;      /* perkecil lebar tombol */
+    font-size: 14px;   /* font lebih kecil */
+    padding: 8px 8px;  /* padding lebih ramping */
+  }
+
+  .button-container {
+    top: 60%;          /* geser sedikit agar pas */
+    gap: 12px;         /* jarak antar tombol lebih rapat */
+  }
+}
 
 .loading {
   position: fixed;
@@ -83,18 +91,14 @@
 }
 
 
-    .image-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .fullscreen-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.fullscreen-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
     /* Container untuk menumpuk button vertikal */
 .button-container {
   position: absolute;
