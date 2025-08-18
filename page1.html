@@ -14,10 +14,22 @@
         }
         
         body {
-            background-color: #111;
+            background-color: #ffffff;
             color: #fff;
             overflow-x: hidden;
         }
+
+         /* Efek transisi antar halaman */
+    body {
+      opacity: 0; /* mulai transparan */
+      transition: opacity 2s ease;
+    }
+    body.fade-in {
+      opacity: 1; /* muncul smooth */
+    }
+    body.fade-out {
+      opacity: 0; /* hilang smooth */
+    }
         
         /* Main Video Section */
         .hero {
@@ -218,7 +230,7 @@
     <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline>
             <!-- Replace with your main video -->
-            <source src="https://example.com/main-video.mp4" type="video/mp4">
+            <source src="Alam Sutera Group.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         
@@ -393,6 +405,26 @@
             // Start the application
             init();
         });
+
+
+            // Fade-in saat halaman selesai dimuat
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.body.classList.add("fade-in");
+      }, 50); // sedikit delay agar transisi terlihat
+    });
+
+    // Opsional: kalau mau smooth juga saat user klik link keluar halaman
+    document.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.body.classList.remove("fade-in");
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = link.href;
+        }, 800); // sesuai durasi transition
+      });
+    });
     </script>
 </body>
 </html>
