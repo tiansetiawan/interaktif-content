@@ -23,7 +23,7 @@ body, html {
             /* Efek transisi antar halaman */
     body {
       opacity: 0; /* mulai transparan */
-      transition: opacity 2s ease;
+      transition: opacity 0s ease;
     }
     body.fade-in {
       opacity: 1; /* muncul smooth */
@@ -127,9 +127,9 @@ body, html {
     </style>
 </head>
 <body>
-  <div class="loading" id="loading">
+  <!-- <div class="loading" id="loading">
   <div class="spinner"></div>
-</div>
+</div> -->
 
 <div class="image-container">
 <video class="fullscreen-image" id="video" autoplay muted loop playsinline>
@@ -213,10 +213,21 @@ body, html {
     document.body.classList.add("fade-out"); // mulai fade
     setTimeout(() => {
       window.location.href = "next.html"; 
-    }, 300); // tunggu animasi selesai baru pindah
+    }, 0); // tunggu animasi selesai baru pindah
   });
 </script>
 
+
+<!-- <script>
+  const playButton = document.getElementById("playButton");
+
+  playButton.addEventListener("click", () => {
+    document.body.classList.add("fade-out"); // mulai fade
+    setTimeout(() => {
+      window.location.href = "next.html"; 
+    }, 300); // tunggu animasi selesai baru pindah
+  });
+</script> -->
 
 </body>
 </html>

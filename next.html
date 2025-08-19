@@ -23,7 +23,7 @@ body, html {
     /* Efek transisi antar halaman */
     body {
       opacity: 0; /* mulai transparan */
-      transition: opacity 2s ease;
+      transition: opacity 0s ease;
     }
     body.fade-in {
       opacity: 1; /* muncul smooth */
@@ -47,20 +47,6 @@ body, html {
         height: 100%;
       }
     }
-
-    /* Atur tombol agar responsif di layar kecil */
-@media (max-width: 300px) {
-  .overlay-btn {
-    width: 12rem;      /* perkecil lebar tombol */
-    font-size: 14px;   /* font lebih kecil */
-    padding: 8px 8px;  /* padding lebih ramping */
-  }
-
-  .button-container {
-    top: 60%;          /* geser sedikit agar pas */
-    gap: 12px;         /* jarak antar tombol lebih rapat */
-  }
-}
 
 .loading {
   position: fixed;
@@ -97,44 +83,71 @@ body, html {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;          /* isi layar tanpa distorsi */
+  object-position: center;    /* selalu center di desktop */
 }
+
+
     /* Container untuk menumpuk button vertikal */
 .button-container {
   position: absolute;
-  top: 65%;        /* bisa diubah sesuai posisi */
+  top: 65%;        
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: column; /* susun atas ke bawah */
-  gap: 18px; /* jarak antar tombol */
-  z-index: 10; /* pastikan muncul di atas video */
+  flex-direction: column; 
+  gap: 18px; 
+  z-index: 10; 
+  width: 90%;             /* supaya tombol ikut mengecil */
+  max-width: 300px;       /* batasi lebar maksimal */
 }
 
 .overlay-btn {
-  background: #ffffff00;                /* putih polos */
-  color: #000;                     /* teks hitam */
-  border: 1px solid #000;          /* border tipis hitam */
-  padding: 10px 10px;              /* tinggi & lebar */
-  font-size: 16px;
-  font-family: Arial, sans-serif;  /* font clean */
-  border-radius: 50px;             /* oval */
+  background: #ffffff00;
+  color: #000;
+  border: 1px solid #000;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 15rem;
+  width: 100%;             /* penuh mengikuti container */
 }
 
 /* Efek hover */
 .overlay-btn:hover {
-  background: #c2c2c288;             /* sedikit abu muda saat hover */
+  background: #c2c2c288;
 }
+
+
+@media (min-width: 768px) {
+  .fullscreen-image {
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+    /* Atur tombol agar responsif di layar kecil */
+/* Responsif lebih kecil */
+@media (max-width: 300px) {
+  .overlay-btn {
+    font-size: 0.8rem;   /* perkecil font */
+    padding: 8px;
+  }
+  .button-container {
+    gap: 12px;
+    top: 60%;
+  }
+}
+
 
   </style>
 </head>
 <body>
-  <div class="loading" id="loading">
+  <!-- <div class="loading" id="loading">
   <div class="spinner"></div>
-</div>
+</div> -->
 
 
 <div class="image-container">
