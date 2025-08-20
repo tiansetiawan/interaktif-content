@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Spesifikasi Genteng Neo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background-color: #ffffff;
+    }
+
+    /* Efek transisi antar halaman */
+    body {
+      opacity: 0; /* mulai transparan */
+      transition: opacity 0s ease;
+    }
+    body.fade-in {
+      opacity: 1; /* muncul smooth */
+    }
+    body.fade-out {
+      opacity: 0; /* hilang smooth */
+    }
+
+    .image-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .fullscreen-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    /* Animasi Spinner */
+    .spinner {
+      border: 6px solid rgba(22, 197, 250, 0.884);
+      border-top: 6px solid #fff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Home button */
+    .home-button {
+      position: fixed;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      font-size: 24px;
+      color: white;
+      padding: 3px 3px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .home-button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* Bottom Right Box */
+    .bottom-right {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      z-index: 200;
+      font-family: Arial, sans-serif;
+    }
+
+    .bottom-right span {
+      font-weight: bold;
+      font-size: small;
+      color: #000;
+      background: #ffffff00;
+      padding: 8px 12px;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .arrow-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      font-size: 20px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .arrow-btn:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Spinner -->
+  <!-- <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div> -->
+
+  <!-- Home Button -->
+  <div class="home-button" onclick="navigateTo('next.html')">
+    <i class="bi bi-house-fill"></i>
+  </div>
+
+  <!-- Background Image -->
+  <div class="image-container">
+    <img src="aksesoris.jpg" alt="Background" class="fullscreen-image" id="background">
+  </div>
+
+  <!-- Bottom Right Navigation -->
+  <!-- <div class="bottom-right">
+    <span>Aksesoris</span>
+    <button class="arrow-btn" onclick="navigateTo('page1.html')">›</button>
+  </div> -->
+
+  <script>
+    // Loading hilang setelah gambar selesai dimuat
+    const img = document.getElementById("background");
+    const loading = document.getElementById("loading");
+
+    img.onload = function() {
+      setTimeout(() => {
+        loading.style.display = "none";
+      }, 500);
+    };
+
+    img.onerror = function() {
+      loading.innerHTML = "<p style='color:red'>Gagal memuat gambar</p>";
+    };
+
+    // Fade-in saat halaman selesai dimuat
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.body.classList.add("fade-in");
+      }, 50);
+    });
+
+    // Navigasi tombol
+    function navigateTo(path) {
+      document.body.classList.remove("fade-in");
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = path;
+      }, 0);
+    }
+  </script>
+</body>
+</html>

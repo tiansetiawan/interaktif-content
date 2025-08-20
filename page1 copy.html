@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Video Landing Page</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+         /* Efek transisi antar halaman */
+    body {
+      opacity: 0; /* mulai transparan */
+      transition: opacity 0s ease;
+    }
+    body.fade-in {
+      opacity: 1; /* muncul smooth */
+    }
+    body.fade-out {
+      opacity: 0; /* hilang smooth */
+    }
+        
+        /* Main Video Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Video Gallery */
+        .gallery {
+            padding: 50px 20px;
+            background-color: #222;
+        }
+        
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .video-thumbnail:hover {
+            transform: scale(1.03);
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .play-icon::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid #333;
+            margin-left: 5px;
+        }
+        
+        .video-title {
+            padding: 15px;
+            background-color: #333;
+            text-align: center;
+        }
+        
+        /* Video Modal */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .video-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+        }
+        
+        .modal-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Controls */
+        .video-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 3;
+        }
+        
+        .control-btn {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Hero Section with Looping Video -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <!-- Replace with your main video -->
+            <source src="Alam Sutera Group.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="hero-content">
+            <h1>Welcome to Our Video Experience</h1>
+            <p>Discover our collection of amazing videos. Click below to explore more.</p>
+            <button class="control-btn" id="exploreBtn">Explore Gallery</button>
+        </div>
+        
+        <div class="video-controls">
+            <button class="control-btn" id="playPauseBtn">Pause</button>
+            <button class="control-btn" id="muteBtn">Unmute</button>
+        </div>
+    </section>
+    
+    <!-- Video Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2>Video Gallery</h2>
+        <div class="video-grid">
+            <!-- Video Thumbnails will be added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <video class="modal-video" controls id="modalVideo">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const heroVideo = document.querySelector('.hero-video');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            const exploreBtn = document.getElementById('exploreBtn');
+            const gallerySection = document.getElementById('gallery');
+            const videoGrid = document.querySelector('.video-grid');
+            const videoModal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Video Data - Replace with your actual videos
+            const videoGallery = [
+                {
+                    title: "Beautiful Nature",
+                    thumbnail: "https://via.placeholder.com/300x200?text=Nature+Thumbnail",
+                    videoUrl: "https://example.com/videos/nature.mp4"
+                },
+                {
+                    title: "City Life",
+                    thumbnail: "https://via.placeholder.com/300x200?text=City+Thumbnail",
+                    videoUrl: "https://example.com/videos/city.mp4"
+                },
+                {
+                    title: "Ocean Waves",
+                    thumbnail: "https://via.placeholder.com/300x200?text=Ocean+Thumbnail",
+                    videoUrl: "https://example.com/videos/ocean.mp4"
+                },
+                {
+                    title: "Mountain View",
+                    thumbnail: "https://via.placeholder.com/300x200?text=Mountain+Thumbnail",
+                    videoUrl: "https://example.com/videos/mountain.mp4"
+                },
+                {
+                    title: "Wildlife",
+                    thumbnail: "https://via.placeholder.com/300x200?text=Wildlife+Thumbnail",
+                    videoUrl: "https://example.com/videos/wildlife.mp4"
+                },
+                {
+                    title: "Time Lapse",
+                    thumbnail: "https://via.placeholder.com/300x200?text=TimeLapse+Thumbnail",
+                    videoUrl: "https://example.com/videos/timelapse.mp4"
+                }
+            ];
+            
+            // Initialize the page
+            function init() {
+                // Setup main video controls
+                setupVideoControls();
+                
+                // Build the video gallery
+                buildVideoGallery();
+                
+                // Setup modal functionality
+                setupModal();
+                
+                // Smooth scroll to gallery
+                exploreBtn.addEventListener('click', function() {
+                    gallerySection.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+            
+            // Setup main video controls
+            function setupVideoControls() {
+                playPauseBtn.addEventListener('click', function() {
+                    if (heroVideo.paused) {
+                        heroVideo.play();
+                        playPauseBtn.textContent = 'Pause';
+                    } else {
+                        heroVideo.pause();
+                        playPauseBtn.textContent = 'Play';
+                    }
+                });
+                
+                muteBtn.addEventListener('click', function() {
+                    heroVideo.muted = !heroVideo.muted;
+                    muteBtn.textContent = heroVideo.muted ? 'Unmute' : 'Mute';
+                });
+            }
+            
+            // Build the video gallery from data
+            function buildVideoGallery() {
+                videoGallery.forEach(video => {
+                    const videoItem = document.createElement('div');
+                    videoItem.className = 'video-thumbnail';
+                    videoItem.innerHTML = `
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <div class="play-icon"></div>
+                        <div class="video-title">${video.title}</div>
+                    `;
+                    
+                    videoItem.addEventListener('click', function() {
+                        openModal(video.videoUrl);
+                    });
+                    
+                    videoGrid.appendChild(videoItem);
+                });
+            }
+            
+            // Setup modal functionality
+            function setupModal() {
+                closeModal.addEventListener('click', function() {
+                    closeVideoModal();
+                });
+                
+                // Close modal when clicking outside
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === videoModal) {
+                        closeVideoModal();
+                    }
+                });
+            }
+            
+            // Open modal with selected video
+            function openModal(videoSrc) {
+                modalVideo.src = videoSrc;
+                videoModal.classList.add('active');
+                modalVideo.play();
+                
+                // Pause the background video when modal is open
+                heroVideo.pause();
+                playPauseBtn.textContent = 'Play';
+            }
+            
+            // Close video modal
+            function closeVideoModal() {
+                videoModal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+                
+                // Resume background video if it was playing
+                if (playPauseBtn.textContent === 'Pause') {
+                    heroVideo.play();
+                }
+            }
+            
+            // Start the application
+            init();
+        });
+
+
+            // Fade-in saat halaman selesai dimuat
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.body.classList.add("fade-in");
+      }, 50); // sedikit delay agar transisi terlihat
+    });
+
+    // Opsional: kalau mau smooth juga saat user klik link keluar halaman
+    document.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.body.classList.remove("fade-in");
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = link.href;
+        }, 800); // sesuai durasi transition
+      });
+    });
+    </script>
+</body>
+</html>
