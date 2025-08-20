@@ -78,20 +78,21 @@
 
     /* Home button */
     .home-button {
-      position: fixed;
-      top: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 200;
-      font-size: 24px;
-      color: white;
-      padding: 3px 3px;
-      cursor: pointer;
-      transition: background 0.3s;
-      width: 20%;
-      text-align: center;
-      background-color: black;
-      border-radius: 0px 0px 8px 8px;
+position: fixed;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    font-size: 66px;
+    color: white;
+    padding: 3px 3px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 17%;
+    text-align: center;
+    background-color: black;
+    border-radius: 0px 0px 30px 30px;
+    height: 6rem;
     }
 
     .home-button:hover {
@@ -110,23 +111,26 @@
     }
 
     .bottom-right span {
-      font-weight: bold;
-      font-size: small;
-      color: #000;
-      background: #ffffff00;
-      padding: 8px 12px;
-      border-radius: 4px 0 0 4px;
+    font-weight: bold;
+    color: #000;
+    background: #ffffff00;
+    padding: 8px 12px;
+    border-radius: 4px 0 0 4px;
+    font-size: 3rem;
     }
 
     .arrow-btn {
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      font-size: 20px;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-      transition: background 0.3s;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 6rem;
+    height: 5rem;
+    align-items: center;
+    font-size: 3rem;
     }
 
     .arrow-btn:hover {
@@ -153,7 +157,9 @@
   <!-- Bottom Right Navigation -->
   <div class="bottom-right">
     <span>Data Teknikal</span>
-    <button class="arrow-btn" onclick="navigateTo('data-teknikal.html')">›</button>
+    <button class="arrow-btn" onclick="navigateTo('data-teknikal.html')">
+      <i class="bi bi-chevron-right"></i>
+    </button>
   </div>
 
   <script>

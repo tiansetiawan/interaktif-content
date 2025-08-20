@@ -111,12 +111,12 @@ position: fixed;
     }
 
     .bottom-right span {
-      font-weight: bold;
-      font-size: small;
-      color: #000;
-      background: #ffffff00;
-      padding: 8px 12px;
-      border-radius: 4px 0 0 4px;
+    font-weight: bold;
+    color: #000;
+    background: #ffffff00;
+    padding: 8px 12px;
+    border-radius: 4px 0 0 4px;
+    font-size: 3rem;
     }
 
     .arrow-btn {
@@ -130,6 +130,7 @@ position: fixed;
     width: 6rem;
     height: 5rem;
     align-items: center;
+    font-size: 3rem;
     }
 
     .arrow-btn:hover {
@@ -156,7 +157,9 @@ position: fixed;
   <!-- Bottom Right Navigation -->
   <div class="bottom-right">
     <span>Aksesoris</span>
-    <button class="arrow-btn" onclick="navigateTo('aksesoris.html')">›</button>
+    <button class="arrow-btn" onclick="navigateTo('aksesoris.html')">
+      <i class="bi bi-chevron-right"></i>
+    </button>
   </div>
 
   <script>
