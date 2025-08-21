@@ -91,9 +91,9 @@ display: flex;
     margin-top: 151px;
     }
 
-        /* Modal styles */
+    /* Modal overlay */
     .modal {
-      display: none; /* Hidden by default */
+      display: flex;
       position: fixed;
       z-index: 1000;
       left: 0;
@@ -103,22 +103,39 @@ display: flex;
       background: rgba(0,0,0,0.5);
       justify-content: center;
       align-items: center;
+
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
     }
 
+    /* Modal content with scale animation */
     .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-    max-width: 80%;
-    width: 60%;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+      max-width: 300px;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      max-width: 80%;
+      width: 60%;
+    }
+    .modal.show .modal-content {
+      transform: scale(1);
+      opacity: 1;
     }
 
     .modal-content img {
     width: 100%;
     height: 100%;
-}
+    }
 
     .close-btn {
       position: absolute;
@@ -150,7 +167,7 @@ display: flex;
     <div class="overlay-btn">Gallery Project</div>
   </div>
 
-  <div class="overlay-btn" id="openModal">Scan QR for download catalog</div>
+  <div class="overlay-btn" style="background-color: black;" id="openModal">Scan QR for download catalog</div>
 </div>
 
 
@@ -164,23 +181,23 @@ display: flex;
     </div>
   </div>
 
-   <script>
+  <script>
     const openModal = document.getElementById("openModal");
     const closeModal = document.getElementById("closeModal");
     const qrModal = document.getElementById("qrModal");
 
     openModal.addEventListener("click", () => {
-      qrModal.style.display = "flex";
+      qrModal.classList.add("show");
     });
 
     closeModal.addEventListener("click", () => {
-      qrModal.style.display = "none";
+      qrModal.classList.remove("show");
     });
 
     // Tutup modal kalau klik di luar konten
     window.addEventListener("click", (e) => {
       if (e.target === qrModal) {
-        qrModal.style.display = "none";
+        qrModal.classList.remove("show");
       }
     });
   </script>
