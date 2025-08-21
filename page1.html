@@ -175,26 +175,33 @@
     
     // Data campuran: gambar + video (lokal folder)
     const mediaGallery = [
-      { title: "Beautiful Nature", type: "video", thumbnail: "images/foto.jpg", url: "videos/nature.mp4" },
-      { title: "City Life", type: "image", thumbnail: "images/city-thumb.jpg", url: "images/city.jpg" },
-      { title: "Ocean Waves", type: "video", thumbnail: "images/ocean-thumb.jpg", url: "videos/ocean.mp4" },
-      { title: "Mountain View", type: "image", thumbnail: "images/foto.jpg", url: "images/foto.jpg" }
+      // { title: "neo", type: "video", thumbnail: "images/foto.jpg", url: "videos/nature.mp4" },
+      { title: "neo", type: "image", thumbnail: "images/9.jpeg", url: "images/9.jpeg" },
+      { title: "neo", type: "image", thumbnail: "images/1.jpeg", url: "images/1.jpeg" },
+      { title: "neo", type: "image", thumbnail: "images/2.jpeg", url: "images/2.jpeg" },
+      { title: "neo", type: "image", thumbnail: "images/3.jpeg", url: "images/3.jpeg" },
+      { title: "neo", type: "image", thumbnail: "images/4.jpeg", url: "images/4.jpeg" },
+      { title: "neo", type: "image", thumbnail: "images/7.jpeg", url: "images/7.jpeg" },
+      { title: "neo", type: "image", thumbnail: "images/6.jpeg", url: "images/6.jpeg" }
     ];
 
     // Bangun gallery
-    mediaGallery.forEach(media => {
-      const item = document.createElement('div');
-      item.className = 'video-thumbnail';
-      item.innerHTML = `
-        <img src="${media.thumbnail}" alt="${media.title}">
-        <div class="icon-overlay">
-          ${media.type === 'video' ? '<i class="bi bi-play-fill"></i>' : '<i class="bi bi-image"></i>'}
-        </div>
-        <div class="video-title">${media.title}</div>
-      `;
-      item.addEventListener('click', () => openModal(media));
-      videoGrid.appendChild(item);
-    });
+ mediaGallery.forEach(media => {
+  const item = document.createElement('div');
+  item.className = 'video-thumbnail';
+  item.innerHTML = `
+    <img src="${media.thumbnail}" alt="${media.title}">
+    ${media.type === 'video' ? `
+      <div class="icon-overlay">
+        <i class="bi bi-play-fill"></i>
+      </div>
+    ` : ''}
+    <div class="video-title">${media.title}</div>
+  `;
+  item.addEventListener('click', () => openModal(media));
+  videoGrid.appendChild(item);
+});
+
 
     // Modal
     function openModal(media) {
