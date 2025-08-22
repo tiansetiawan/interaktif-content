@@ -24,82 +24,161 @@
     }
 
     h1 {
-    font-size: 5.5rem;
-    color: #004aad;
-    margin-bottom: 2rem;
-    margin-top: 10rem;
+      font-size: 5.3rem;
+      color: #004aad;
+      margin-bottom: 2rem;
+      margin-top: 10rem;
+      text-align: center;
     }
 
     .grid {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 900px;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 900px;
+      margin-left: 1rem;
     }
 
     .card {
-    background: #004aad;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 49%;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    color: #fff;
-    height: 37rem;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 49%;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      color: #fff;
+      height: 32rem;
     }
 
     .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .card .label {
-      padding: 0.5rem;
-      font-size: 1rem;
-      font-weight: bold;
+    .card2 {
+      border-radius: 8px;
+      overflow: hidden;
+      width: 117%;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      color: #fff;
+      height: 108rem;
+      margin-top: 31rem;
+      justify-content: center;
     }
 
-    .checkmark {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      font-size: 2rem;
-      color: #28a745;
-      background: #fff;
-      border-radius: 50%;
+    .card2 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .video-box {
-    background: #004aad;
+      background: #004aad;
+      width: 100%;
+      max-width: 872px;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      margin-top: 4rem;
+    }
+
+    .video-box2 {
     width: 100%;
-    max-width: 895px;
-    aspect-ratio: 16 / 9;
+    max-width: 872px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    margin-top: 5rem;
+    flex-direction: column;
+    position: relative;
+    gap: 1rem;
+    margin-bottom: 11rem;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .play-btn {
+    position: absolute;
+    top: 41%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 0rem 2rem;
     cursor: pointer;
-    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
     }
 
-    .video-box i {
-      font-size: 4rem;
-      color: #000;
-      background: #fff;
-      border-radius: 50%;
-      padding: 0.5rem 0.7rem;
-      height: 37rem;
+    .play-btn:hover {
+      background: rgba(0,0,0,0.8);
     }
 
-        .home-button {
+    .play-btn i {
+ font-size: 6.5rem;
+    color: white;
+    }
+
+    /* Modal */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .video-modal.active {
+      display: flex;
+    }
+
+    .video-modal video {
+      width: 90%;
+      max-width: 900px;
+      border-radius: 8px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .home-button {
       position: fixed;
       top: -1px;
       left: 50%;
@@ -119,6 +198,14 @@
       background: rgba(255,255,255,0.3);
     }
 
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      align-items: center;
+      justify-items: center;
+    }
+
     @media (max-width: 600px) {
       .card {
         width: 100%;
@@ -128,52 +215,93 @@
 </head>
 <body>
 
-    <div class="home-button" onclick="navigateTo('next.html')">
+  <div class="home-button" onclick="navigateTo('next.html')">
     <i class="bi bi-house-fill"></i>
   </div>
 
+  <div class="container">
+    <h1>SOLUSI ANTI BOCOR!</h1>
 
-  <h1>SOLUSI ANTI BOCOR!</h1>
-
-  <!-- Grid Gambar -->
-<div class="grid">
-  <!-- Card 1 -->
-  <div class="card">
-    <img src="images/nok kering.jpg" alt="Nok Kering">
-    <div class="label">Nok Kering</div>
-    <div class="checkmark">✔</div>
+    <!-- Grid Gambar -->
+    <div class="grid">
+      <div class="card">
+        <img src="images/nok kering.png" alt="Nok Kering">
+      </div>
+      <div class="card">
+        <img src="images/cisflash.png" alt="Cis Flashing">
+      </div>
+    </div>
   </div>
 
-  <!-- Card 2 -->
-  <div class="card">
-    <img src="images/cisflash.jpg" alt="Cis Flashing">
-    <div class="label">Cis Flashing</div>
-    <div class="checkmark">✔</div>
+  <!-- Video pertama -->
+  <div class="video-box">
+    <video autoplay muted loop controls style="width:100%; border-radius:8px; object-fit:cover;">
+      <source src="images/Poweres By2.mp4" type="video/mp4">
+      Browser anda tidak mendukung video HTML5.
+    </video>
   </div>
-</div>
 
-<!-- Modal Video -->
-<!-- Video Box Langsung -->
-<div class="video-box">
-  <video id="localVideo" autoplay muted loop controls style="width:100%; height:100%; border-radius:8px; object-fit:cover;">
-    <source src="images/Poweres By2.mp4" type="video/mp4">
-    Browser anda tidak mendukung video HTML5.
-  </video>
-</div>
+  <div class="container">
+    <div class="card2">
+      <img src="images/spek-dry.png" alt="spek-dry">
+    </div>
+  </div>
 
+  <!-- Video grid dengan tombol play -->
+  <div class="video-box2">
+    <div class="video-wrapper">
+      <video class="localVideo" muted poster="images/3.jpeg"></video>
+      <div class="play-btn" onclick="openVideo('images/Poweres By2.mp4')">
+        <i class="bi bi-play-fill"></i>
+      </div>
+    </div>
+    <div class="video-wrapper">
+      <video class="localVideo" muted poster="images/3.jpeg"></video>
+      <div class="play-btn" onclick="openVideo('images/Poweres By2.mp4')">
+        <i class="bi bi-play-fill"></i>
+      </div>
+    </div>
+    <div class="video-wrapper">
+      <video class="localVideo" muted poster="images/3.jpeg"></video>
+      <div class="play-btn" onclick="openVideo('images/Poweres By2.mp4')">
+        <i class="bi bi-play-fill"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="videoModal" class="video-modal">
+    <span class="modal-close" onclick="closeVideo()">&times;</span>
+    <video id="modalVideo" controls autoplay></video>
+  </div>
 
 <script>
-  function openVideo() {
-    document.getElementById("videoModal").style.display = "flex";
+  function openVideo(src) {
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    modalVideo.src = src;
+    modal.classList.add("active");
+    modalVideo.play();
   }
 
-  // Tutup modal jika user klik luar area video
+  function closeVideo() {
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    modalVideo.pause();
+    modalVideo.src = "";
+    modal.classList.remove("active");
+  }
+
+  // Tutup modal dengan klik area gelap
   document.getElementById("videoModal").addEventListener("click", function(e) {
     if (e.target.id === "videoModal") {
-      this.style.display = "none";
-      document.getElementById("localVideo").pause();
+      closeVideo();
     }
   });
+
+  function navigateTo(path) {
+    window.location.href = path;
+  }
 </script>
 </body>
 </html>
