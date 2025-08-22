@@ -193,5 +193,59 @@ position: fixed;
       }, 0);
     }
   </script>
+
+
+<script>
+  function navigateTo(path) {
+    window.location.href = path;
+  }
+
+  // --- DETEKSI SWIPE KANAN SAJA ---
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const swipeThreshold = 80; // minimal jarak geser (px)
+
+  document.addEventListener("touchstart", function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener("touchend", function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    let diffX = touchEndX - touchStartX;
+
+    if (diffX > swipeThreshold) {
+      console.log("Swipe kanan ➝ Navigasi ke spesifikasi.html");
+      navigateTo("next.html");
+    }
+  }
+</script>
+
+<script>
+  let idleTime = 0;
+  let idleLimit = 10; // detik
+  let idleTimer;
+
+  function resetTimer() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(redirectPage, idleLimit * 5000); 
+  }
+
+  function redirectPage() {
+    window.location.href = "index.html"; // halaman tujuan
+  }
+
+  // Event untuk mendeteksi aktivitas user
+  window.onload = resetTimer;
+  document.onmousemove = resetTimer;
+  document.onkeydown = resetTimer;
+  document.ontouchstart = resetTimer; 
+  document.onscroll = resetTimer;
+</script>
+
 </body>
 </html>

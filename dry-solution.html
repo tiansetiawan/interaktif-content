@@ -72,7 +72,7 @@
       position: relative;
       color: #fff;
       height: 108rem;
-      margin-top: 31rem;
+      margin-top: 11rem;
       justify-content: center;
     }
 
@@ -96,17 +96,17 @@
     }
 
     .video-box2 {
-    width: 100%;
-    max-width: 872px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    margin-top: 5rem;
-    flex-direction: column;
-    position: relative;
-    gap: 1rem;
-    margin-bottom: 11rem;
+      width: 100%;
+      max-width: 872px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      margin-top: -2rem;
+      flex-direction: column;
+      position: relative;
+      gap: 5rem;
+      margin-bottom: 11rem;
     }
 
     .video-wrapper {
@@ -124,18 +124,18 @@
     }
 
     .play-btn {
-    position: absolute;
-    top: 41%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    padding: 0rem 2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      padding: 0rem 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
     }
 
     .play-btn:hover {
@@ -143,8 +143,8 @@
     }
 
     .play-btn i {
- font-size: 6.5rem;
-    color: white;
+      font-size: 6.5rem;
+      color: white;
     }
 
     /* Modal */
@@ -163,16 +163,16 @@
       display: flex;
     }
 
-    .video-modal video {
+    .modal-content {
+      position: relative;
       width: 90%;
       max-width: 900px;
-      border-radius: 8px;
     }
 
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 30px;
+      top: -40px;
+      right: -10px;
       font-size: 2rem;
       color: white;
       cursor: pointer;
@@ -250,46 +250,70 @@
   <!-- Video grid dengan tombol play -->
   <div class="video-box2">
     <div class="video-wrapper">
-      <video class="localVideo" muted poster="images/3.jpeg"></video>
-      <div class="play-btn" onclick="openVideo('images/Poweres By2.mp4')">
+      <div class="play-btn" onclick="openVideo('https://drive.google.com/file/d/1tk1rzXXEfelkiHCAUEYep1nSQ3Je8JFv/preview', true)">
         <i class="bi bi-play-fill"></i>
       </div>
+      <img src="images/dry-system-wb.jpg" style="width:100%; height:31rem; object-fit:cover; border-radius:8px;" alt="Drive Video">
     </div>
     <div class="video-wrapper">
-      <video class="localVideo" muted poster="images/3.jpeg"></video>
-      <div class="play-btn" onclick="openVideo('images/Poweres By2.mp4')">
+      <div class="play-btn" onclick="openVideo('https://drive.google.com/file/d/1nWCK6MFf5nf5ZY00mryrQIjOmubU9vW7/preview', true)">
         <i class="bi bi-play-fill"></i>
       </div>
+      <img src="images/c-flashing.jpg" style="width:100%; height:31rem; object-fit:cover; border-radius:8px;" alt="Drive Video">
     </div>
     <div class="video-wrapper">
-      <video class="localVideo" muted poster="images/3.jpeg"></video>
-      <div class="play-btn" onclick="openVideo('images/Poweres By2.mp4')">
+      <div class="play-btn" onclick="openVideo('https://drive.google.com/file/d/145rOn4z2nZQeqiQ4mt_5oKI4pUTFIBDT/preview', true)">
         <i class="bi bi-play-fill"></i>
       </div>
+      <img src="images/c-flashing2.jpg" style="width:100%; height:31rem; object-fit:cover; border-radius:8px;" alt="Drive Video">
     </div>
   </div>
 
   <!-- Modal -->
   <div id="videoModal" class="video-modal">
-    <span class="modal-close" onclick="closeVideo()">&times;</span>
-    <video id="modalVideo" controls autoplay></video>
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeVideo()">&times;</span>
+      <div id="videoContainer"></div>
+    </div>
   </div>
 
 <script>
-  function openVideo(src) {
+  function openVideo(src, isEmbed=false) {
     const modal = document.getElementById("videoModal");
-    const modalVideo = document.getElementById("modalVideo");
-    modalVideo.src = src;
+    const videoContainer = document.getElementById("videoContainer");
+
+    // kosongkan kontainer dulu
+    videoContainer.innerHTML = "";
+
+    if (isEmbed) {
+      // jika video embed (Google Drive, YouTube, dll)
+      const iframe = document.createElement("iframe");
+      iframe.src = src + (src.includes("?") ? "&autoplay=1" : "?autoplay=1");
+      iframe.width = "100%";
+      iframe.height = "500";
+      iframe.allow = "autoplay";
+      iframe.style.borderRadius = "8px";
+      iframe.style.border = "none";
+      videoContainer.appendChild(iframe);
+    } else {
+      // jika video lokal
+      const video = document.createElement("video");
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.style.width = "100%";
+      video.style.borderRadius = "8px";
+      videoContainer.appendChild(video);
+    }
+
     modal.classList.add("active");
-    modalVideo.play();
   }
 
   function closeVideo() {
     const modal = document.getElementById("videoModal");
-    const modalVideo = document.getElementById("modalVideo");
-    modalVideo.pause();
-    modalVideo.src = "";
+    const videoContainer = document.getElementById("videoContainer");
     modal.classList.remove("active");
+    videoContainer.innerHTML = ""; // hapus konten agar berhenti diputar
   }
 
   // Tutup modal dengan klik area gelap
@@ -302,6 +326,38 @@
   function navigateTo(path) {
     window.location.href = path;
   }
+
+  // --- DETEKSI SWIPE KANAN SAJA ---
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const swipeThreshold = 80; // minimal jarak geser (px)
+
+  document.addEventListener("touchstart", function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener("touchend", function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    let diffX = touchEndX - touchStartX;
+    if (diffX > swipeThreshold) {
+      console.log("Swipe kanan ➝ Navigasi ke spesifikasi.html");
+      navigateTo("next.html");
+    }
+  }
 </script>
+
+<script>
+  // Timer 5 detik
+  window.onload = function() {
+    setTimeout(function() {
+      window.location.href = "spesifikasi.html"; // halaman tujuan
+    }, 70000); // 5000ms = 5 detik
+  };
+</script>
+
 </body>
 </html>
